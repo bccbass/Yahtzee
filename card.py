@@ -3,19 +3,31 @@ def valid_hand(hand):
     return len(check_ints) == 5 # ensure there are exactly 5 ints in hand
 
 def lrg_straight(hand):
-    if valid_hand(hand):
-        return len(set(hand)) == 5 and 1 and 6 not in hand
+    return len(set(hand)) == 5 and 1 and 6 not in hand
+
+def sm_straight(hand):
+    if len(set(hand)) == 4:
+        sorted = list(set(hand))
+
 
 def four_kind(hand):
-    if valid_hand(hand):
-        if len(set(hand)) == 2:
-            hand.sort()
-            return hand[0] != hand[1] or hand[3] != hand[4]
+    if len(set(hand)) == 2:
+        hand.sort()
+        return hand[0] != hand[1] or hand[3] != hand[4]
+
+def full_house(hand):
+    if len(set(hand)) == 2:
+        hand.sort()
+        return hand[0] == hand[1] and hand[3] == hand[4]
+        
+
 
 
 def yahtzee(hand):
-    if valid_hand(hand):
-        return len(set(hand)) == 1 
+    return len(set(hand)) == 1 
 
 
-print(lrg_straight([1,2,3, 4.5, 'j', True]))
+x = [9,5,4,3,6,1,67,3,55,6,55]
+y = list(set(x))
+y.sort()
+print(y)

@@ -1,7 +1,7 @@
 import pytest
 
 from  DiceClass import Dice
-from card import valid_hand, yahtzee, lrg_straight, four_kind
+from card import valid_hand, yahtzee, sm_straight, lrg_straight, four_kind, full_house
 
 def test_dice():
     assert 0 < Dice.die() < 7
@@ -16,6 +16,13 @@ def test_four_kind():
     assert not four_kind([3,3,6,6,6])
     assert not four_kind([1,2,3,4,5])
 
+def test_full_house():
+    assert full_house([1,1,1,6,6])
+    assert not full_house([1,1,1,1,6])
+    assert not full_house([1,2,3,4,5])
+
+def test_sm_straight():
+    assert sm_straight([1,4,2,2,3])
 
 def test_lrg_straight():
     assert lrg_straight([1,2,3,4,5])
@@ -28,5 +35,3 @@ def test_yahtzee():
     assert yahtzee([1,1,1,1,1]) 
     assert not yahtzee([1,1,1,1,2])
     assert not yahtzee([1,2,3,4,5])
-
-# def test_four_kind():
