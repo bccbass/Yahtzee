@@ -25,8 +25,8 @@ def re_roll_dice(keeper_hand):
 # hand = roll_dice(5)
 # reroll = re_roll_dice([1,2,3])
 
-print(remove_dice_fr_hand([1,2,3], [1,2,3,4,5,6]))
-print('reroll: ', re_roll_dice([1]))
+# print(remove_dice_fr_hand([1,2,3], [1,2,3,4,5,6]))
+# print('reroll: ', re_roll_dice([1]))
 # print('reroll-> ', reroll)
 # print('Yahtzee hand -> ', hand)
 
@@ -35,3 +35,6 @@ print('reroll: ', re_roll_dice([1]))
 
 # reroll = reroll.split(' ')
 # print(reroll)
+
+
+
