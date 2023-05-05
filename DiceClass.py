@@ -22,7 +22,7 @@ class Dice:
         new_dice = cls.roll(re_roll_x)
         return keeper_hand + new_dice
 
-print(Dice.die())
-print(Dice.roll(5))
-print(Dice.remove([1,2,3], [1,2,3,4,5,6]))
-print(Dice.re_roll([1]))
+# print(Dice.die())
+# print(Dice.roll(5))
+# print(Dice.remove([1,2,3], [1,2,3,4,5,6]))
+# print(Dice.re_roll([1]))
