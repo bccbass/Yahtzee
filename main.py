@@ -8,7 +8,7 @@ Ben = Dice()
 # Ben.hand 
 
 def remove_prompt():
-    remove = input("What dice would you like to reroll? (Press enter to keep hand): ")
+    remove = input("What dice would you like to reroll? (Input position of dice to re-roll. Press enter to keep hand): ")
     parsed = [int(el) for el in remove if el.isdigit()]
     return parsed
 
