@@ -13,20 +13,8 @@ def remove_prompt():
     return parsed
 
 
-# def round():
-#     Ben.new_roll()
-#     chances = 2
-#     Ben.hand
-#     baddies = remove_prompt()
-#     if baddies == 0:
-#         return 
 
-#     while chances > 2:
-#         Ben.hand
-#         baddies = remove_prompt()
-#         Ben.update_hand(baddies)
-#         chances -=1
-#     Ben.hand
+
 
 
 
