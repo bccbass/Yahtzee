@@ -1,6 +1,30 @@
 from random import randint
+from diceArt import dice_art, print_hand
 
 class Dice:
+    def __init__(self):
+        self.__hand = self.roll(5)
+        self.art = dice_art 
+
+    @property
+    def hand(self):
+        print_hand(self.__hand)
+
+    def new_roll(self):
+        self.__hand = self.roll(5)
+
+    def update_hand(self, baddies):
+        for die in baddies:
+            self.__hand.remove(die)
+        re_roll_x = len(baddies)
+        new_dice = self.roll(re_roll_x)
+        self.__hand += new_dice
+        
+        
+        
+
+    
+
     @classmethod
     def die(cls, ):
         return randint(1, 6)
