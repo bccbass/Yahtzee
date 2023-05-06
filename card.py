@@ -6,9 +6,19 @@ def lrg_straight(hand):
     return len(set(hand)) == 5 and 1 and 6 not in hand
 
 def sm_straight(hand):
-    if len(set(hand)) == 4:
-        sorted = list(set(hand))
-
+    hand.sort()
+    if hand[-1]-1 != hand[-2]:
+        hand = hand[:-1]    
+    elif hand[0]+1 != hand[1]:
+        hand = hand[1:]
+    hand = set(hand)    
+    hand_str = ''.join([str(num) for num in hand])
+    return hand_str in '123456'
+def three_kind(hand):
+    if len(set(hand)) in [2, 3]:
+        hand.sort()
+        if hand[0] == hand[2] or hand[-1] == hand[-3]:
+            return True
 
 def four_kind(hand):
     if len(set(hand)) == 2:
@@ -27,7 +37,5 @@ def yahtzee(hand):
     return len(set(hand)) == 1 
 
 
-x = [9,5,4,3,6,1,67,3,55,6,55]
-y = list(set(x))
-y.sort()
-print(y)
+x = [1,2,3,4,5]
+print(sm_straight(x))
