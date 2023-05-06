@@ -2,8 +2,7 @@ def valid_hand(hand):
     check_ints = [el for el in hand if type(el) == int] # filter for only ints
     return len(check_ints) == 5 # ensure there are exactly 5 ints in hand
 
-def lrg_straight(hand):
-    return len(set(hand)) == 5 and 1 and 6 not in hand
+
 
 def sm_straight(hand):
     hand.sort()
@@ -14,6 +13,10 @@ def sm_straight(hand):
     hand = set(hand)    
     hand_str = ''.join([str(num) for num in hand])
     return hand_str in '123456'
+
+def lrg_straight(hand):
+    return len(set(hand)) == 5 and 1 and 6 not in hand
+
 def three_kind(hand):
     if len(set(hand)) in [2, 3]:
         hand.sort()
@@ -35,7 +38,3 @@ def full_house(hand):
 
 def yahtzee(hand):
     return len(set(hand)) == 1 
-
-
-x = [1,2,3,4,5]
-print(sm_straight(x))

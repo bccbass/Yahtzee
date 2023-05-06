@@ -37,6 +37,7 @@ class Dice:
             position_string += f'   Die {str(key)}      '
         print(Fore.YELLOW + position_string)
         print(Fore.RESET)
+        
 
 # for Hand as LIST:
     # def update_hand(self, baddies):

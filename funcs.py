@@ -5,13 +5,13 @@ def remove_prompt():
 
 def round(player):
     chances = 2
-    player.new_roll()
-    player.hand
+    player.hand.new_roll()
+    player.hand.hand
     while chances > 0:   
         res = remove_prompt()
         if res == '':
             break
         else:
-            player.update_hand(res)
-            player.hand
+            player.hand.update_hand(res)
+            player.hand.hand
             chances -= 1

@@ -1,7 +1,11 @@
 from DiceClass import Dice
-from funcs import remove_prompt, round
+from CardClass import Card
+from funcs import remove_prompt
+import card
 
 
-Ben = Dice()
 
-round(Ben)
+ben = Card()
+dice = Dice()
+
+print(ben, dice.hand)
