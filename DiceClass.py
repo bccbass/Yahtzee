@@ -19,6 +19,9 @@ class Dice:
         re_roll_x = len(baddies)
         new_dice = self.roll(re_roll_x)
         self.__hand += new_dice
+
+
+
         
         
         
