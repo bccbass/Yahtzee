@@ -11,12 +11,12 @@ def round(dice, card):
     dice.hand
     while chances > 0:   
         res = remove_prompt()
-        if res == '':
+        if not len(res):
             break
         else:
             dice.update_hand(res)
             dice.hand
             chances -= 1
-        print(card.check_hand(dice.list()))
+    print(card.check_hand(dice.list()))
         
     
