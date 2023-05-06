@@ -14,6 +14,9 @@ class Dice:
         # hand_values = self.__hand.values()
         self.print_hand()
 
+    def list(self):
+        return list(self.__hand.values())
+    
     def new_roll(self):
             return {
             1: self.die(),
