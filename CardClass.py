@@ -13,17 +13,24 @@ class Card:
             'Yahtzee!': None,
             'Chance': None
         }
-    
-
-        
         self.test_hand = [three_kind, four_kind, full_house, sm_straight, lg_straight, yahtzee]
+        self.final_score = 0
 
+# Calulates final score. This should only be called once, or else it will keep adding same card to final score.
+    def calc_score(self):
+        for k, v in self.card.items():
+            if isinstance(v, int):
+                self.final_score += v
+        return self.final_score
+            
+    # takes a list and returns a numbered list: eg. [A,B,C] ->['[1] A', '[2] B', '[3] C']
     def enum_categories(self, categories):
         enum_list = []
         for i, el in enumerate(categories):
             enum_list.append(f'[{i+1}] {el}')
         return enum_list
-
+    
+    # Checks a hand against all categories to return any possible match. This needs to accound for excluding already filled categories. 
     def check_hand(self, hand):
         res =[test(hand) for test in self.test_hand if test(hand)]
         res.append('Chance')
