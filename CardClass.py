@@ -2,9 +2,8 @@ from card import three_kind, four_kind, full_house, sm_straight, lg_straight, ya
 from DiceClass import Dice
 
 class Card: 
-    def __init__(self, player='player'):
-        self.player = player
-        self.card = {
+    def __init__(self):
+        self.game_board = {
             'Three of a Kind': None,
             'Four of a Kind': None,
             'Full House': None,
@@ -18,7 +17,7 @@ class Card:
 
 # Calulates final score. This should only be called once, or else it will keep adding same card to final score.
     def calc_score(self):
-        for k, v in self.card.items():
+        for k, v in self.game_board.items():
             if isinstance(v, int):
                 self.final_score += v
         return self.final_score
@@ -41,17 +40,17 @@ class Card:
     def update_round_points(self, category, hand):
         match category:
             case 'Three of a Kind' | 'Four of a Kind' | 'Chance':
-                self.card[category] = sum(hand)
+                self.game_board[category] = sum(hand)
             case 'Full House':
-                self.card[category] = 25
+                self.game_board[category] = 25
             case 'Small Straight':
-                self.card[category] = 30
+                self.game_board[category] = 30
             case 'Large Straight':
-                self.card[category] = 40
+                self.game_board[category] = 40
             case 'Yahtzee!':
-                if self.card[category] != None:
-                    self.card[category] += 100
-                else: self.card[category] = 50
+                if self.game_board[category] != None:
+                    self.game_board[category] += 100
+                else: self.game_board[category] = 50
 
 
 

@@ -1,4 +1,4 @@
-from CardClass import Card
+from PlayerClass import Player
 import colorama
 from colorama import Fore, Back
 from pyfiglet import Figlet
@@ -20,7 +20,7 @@ def choose_category(evaluated_hand):
     return i - 1
 
 
-def create_user_instance(cls):
+def create_user_instance():
     # functionality to accept multiple players for extended features
     players = []
     player_instances = []
@@ -28,17 +28,17 @@ def create_user_instance(cls):
     player = input('Who is playing? ')
     players.append(player)
     for player in players:
-        new_instance = player = cls(player)
+        new_instance = Player(player)
         player_instances.append(new_instance)
     return player_instances
 
         
 
 # GAMEPLAY/GAMEFLOW
-def round(dice, card):
+def round(dice, player):
     chances = 2
     dice.new_roll()
-    print(card.card)
+    print(player.card.game_board)
     dice.hand
 
     while chances > 0:   
@@ -49,27 +49,27 @@ def round(dice, card):
             dice.update_hand(res)
             dice.hand
             chances -= 1
-    valid_categories = card.check_hand(dice.list())
-    formatted_categories = card.enum_categories(valid_categories)
+    valid_categories = player.card.check_hand(dice.list())
+    formatted_categories = player.card.enum_categories(valid_categories)
     i = choose_category(formatted_categories)
     players_category_choice = valid_categories[i]
-    card.update_round_points(players_category_choice, dice.list())
-    print(card.card)
+    player.card.update_round_points(players_category_choice, dice.list())
+    print(player.card.game_board)
 
 
 
-def game(card, dice):
+def game(player, dice):
     print(Fore.CYAN + f.renderText('Yahtzee!'))
-    print(f'Welcome to Yahtzee {card.player}!')
+    player.greet
 
-    for i in range(len(card.card)):
+    for i in range(len(player.card.game_board)):
         print(Fore.YELLOW + f'┌─────────┐\n│ ROUND {i+1} │\n└─────────┘')
 
-        round(dice, card)
+        round(dice, player)
     
-    card.calc_score()
-    print(card.card)
-    print(card.final_score)
+    player.card.calc_score()
+    print(player.card.game_board)
+    print(player.card.final_score)
     # Print numbered elements on their own without brackets
         
     
