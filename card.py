@@ -8,27 +8,17 @@ def valid_hand(hand):
     check_ints = [el for el in hand if type(el) == int] # filter for only ints
     return len(check_ints) == 5 # ensure there are exactly 5 ints in hand
 
-# def sm_straight(hand):
-#     hand.sort()
-#     if hand[-1]-1 != hand[-2]:
-#         hand = hand[:-1]    
-#     elif hand[0]+1 != hand[1]:
-#         hand = hand[1:]
-#     hand = set(hand)    
-#     hand_str = ''.join([str(num) for num in hand])
-#     if hand_str in '123456' and len(hand) in [4, 5]:
-#         return 'Small Straight'
-
 def sm_straight(hand):
-    hand = list(set(hand))
-    if len(hand) in [4, 5]:
-        if hand[-1]-1 != hand[-2]:
-            hand = hand[:-1]    
-        elif hand[0]+1 != hand[1]:
-            hand = hand[1:]
-        hand_str = ''.join([str(num) for num in hand])
-        if hand_str in '123456':
-            return 'Small Straight'
+    hand.sort()
+    if hand[-1]-1 != hand[-2]:
+        hand = hand[:-1]    
+    elif hand[0]+1 != hand[1]:
+        hand = hand[1:]
+    hand = set(hand)    
+    hand_str = ''.join([str(num) for num in hand])
+    if hand_str in '123456' and len(hand) in [4, 5]:
+        return 'Small Straight'
+
 
 def lg_straight(hand):
     if len(set(hand)) == 5:
@@ -66,6 +56,7 @@ def yahtzee(hand):
 
 
 # functions for refactor - creating a dictionary and dict values from hand for all funcs to use
+# STORE hand: dictionary, values (sorted), and dictionary values - this could speed up logic
 # These should maybe all be moved as methods of the Card class
 # Could also implement logic sorting by length of set() before sending to tests
 
@@ -84,3 +75,16 @@ def yahtzee(hand):
 #     if len(set(hand)) in [2, 3]:
 #         if 3 in d_vals or 4 in d_vals:
 #             return 'Three of a Kind'
+
+
+# THIS LOGIC IS NOT WORKING - MAY NEED TWEAKED
+# def sm_straight(hand):
+#     hand = list(set(hand))
+#     if len(hand) in [4, 5]:
+#         if hand[-1]-1 != hand[-2]:
+#             hand = hand[:-1]    
+#         elif hand[0]+1 != hand[1]:
+#             hand = hand[1:]
+#         hand_str = ''.join([str(num) for num in hand])
+#         if hand_str in '123456':
+#             return 'Small Straight'
