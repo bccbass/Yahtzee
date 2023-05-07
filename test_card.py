@@ -45,6 +45,7 @@ def test_lg_straight():
     assert not lg_straight([1,2,3,4,6]) == 'Large Straight'
     assert not lg_straight([1,2,4,5,6]) == 'Large Straight'
     assert not lg_straight([1,1,1,2,2]) == 'Large Straight'
+    assert  lg_straight([3,2,5,4,6]) == 'Large Straight'
 
 
 def test_yahtzee():

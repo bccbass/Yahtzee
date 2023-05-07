@@ -6,7 +6,7 @@ colorama.init()
 
 class Dice:
     def __init__(self):
-        self.__hand = self.new_roll()
+        self.__hand = None
         self.art = dice_art 
 
     @property
@@ -16,9 +16,11 @@ class Dice:
 
     def list(self):
         return list(self.__hand.values())
-    
+    def fresh_hand(self):
+        self.hand = self.new_roll()
+
     def new_roll(self):
-            return {
+            self.__hand = {
             1: self.die(),
             2: self.die(),
             3: self.die(),

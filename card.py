@@ -14,8 +14,9 @@ def sm_straight(hand):
         return 'Small Straight'
 
 def lg_straight(hand):
-    if len(set(hand)) == 5 and 1 and 6 not in hand:
-        return 'Large Straight'
+    if len(set(hand)) == 5:
+        if 1 in hand and 6 not in hand or 6 in hand and 1 not in hand :
+            return 'Large Straight'
 
 def three_kind(hand):
     if len(set(hand)) in [2, 3]:
