@@ -21,7 +21,7 @@ def lg_straight(hand):
 def three_kind(hand):
     if len(set(hand)) in [2, 3]:
         hand.sort()
-        if hand[0] == hand[2] or hand[-1] == hand[-3]:
+        if hand[0] == hand[2] or hand[-1] == hand[-3] or hand[1] == hand[3]:
             return 'Three of a Kind'
 
 def four_kind(hand):

@@ -17,6 +17,7 @@ def test_three_kind():
     assert not three_kind([1,2,6,2,6])
     assert not three_kind([1,1,1,1,1])
     assert three_kind([1,1,1,3,3])
+    assert three_kind([5,5,5,3,6])
 
 def test_four_kind():
     assert four_kind([3,3,3,3,6])
