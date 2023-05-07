@@ -32,14 +32,18 @@ def sm_straight(hand):
 
 def lg_straight(hand):
     if len(set(hand)) == 5:
-        if 1 in hand and 6 not in hand or 6 in hand and 1 not in hand :
+        if 1 in hand and 6 not in hand or 6 in hand and 1 not in hand:
             return 'Large Straight'
+
+
 
 def three_kind(hand):
     if len(set(hand)) in [2, 3]:
         hand.sort()
         if hand[0] == hand[2] or hand[-1] == hand[-3] or hand[1] == hand[3]:
             return 'Three of a Kind'
+
+
 
 def four_kind(hand):
     if len(set(hand)) == 2:
@@ -56,3 +60,27 @@ def full_house(hand):
 def yahtzee(hand):
     if len(set(hand)) == 1:
         return 'Yahtzee!'
+
+
+
+
+
+# functions for refactor - creating a dictionary and dict values from hand for all funcs to use
+# These should maybe all be moved as methods of the Card class
+# Could also implement logic sorting by length of set() before sending to tests
+
+# def mk_hand_dict(hand):
+#     hand_dict = {}
+#     for key in hand:
+#         if key not in hand_dict:
+#             hand_dict[key] = 1
+#         else:
+#             hand_dict[key] +=1
+#     return hand_dict
+
+# def three_kind(hand):
+#     d_hand = mk_hand_dict(hand)
+#     d_vals = d_hand.values()
+#     if len(set(hand)) in [2, 3]:
+#         if 3 in d_vals or 4 in d_vals:
+#             return 'Three of a Kind'
