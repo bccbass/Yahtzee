@@ -1,4 +1,5 @@
 from PlayerClass import Player
+import subprocess
 import colorama
 from colorama import Fore, Back
 from pyfiglet import Figlet
@@ -55,6 +56,7 @@ def round(dice, player):
     players_category_choice = valid_categories[i]
     player.card.update_round_points(players_category_choice, dice.list())
     print(player.card.game_board)
+    subprocess.call(['tput', 'reset'])
 
 
 
