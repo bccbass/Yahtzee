@@ -2,13 +2,15 @@ from CardClass import Card
 
 class Player: 
     def __init__(self, name='player'):
+        self.is_new = False
         self.name = name
         self.high_score = 0
         self.card = Card()
-
+    def new(self):
+        self.is_new = True
     @property
     def greet(self):
-        if self.name != 'player':
+        if not self.is_new:
             print(f'Welcome back {self.name}!')
-        if self.high_score > 0:
-            print(f'Your highest score on record is {self.high_score}')
+        else:
+            print(f'Welcome to Yahtzee!')

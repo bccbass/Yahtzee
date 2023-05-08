@@ -61,17 +61,18 @@ def round(dice, player):
 
 
 def game(player, dice):
-    print(Fore.CYAN + f.renderText('Yahtzee!'))
     player.greet
+    subprocess.call(['tput', 'reset'])
 
-    for i in range(len(player.card.game_board)):
+    # for i in range(len(player.card.game_board)):
+    for i in range(2):
+        print(Fore.CYAN + f.renderText('Yahtzee!'))
         print(Fore.YELLOW + f'┌─────────┐\n│ ROUND {i+1} │\n└─────────┘')
 
         round(dice, player)
-    
+    # caluclates final score and adds it to final score on card
     player.card.calc_score()
-    print(player.card.game_board)
-    print(player.card.final_score)
+
     # Print numbered elements on their own without brackets
         
     
