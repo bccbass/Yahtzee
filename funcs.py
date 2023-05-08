@@ -31,7 +31,7 @@ def create_user_instance():
     for player in players:
         new_instance = Player(player)
         player_instances.append(new_instance)
-    return player_instances
+    return player_instances[0]
 
         
 

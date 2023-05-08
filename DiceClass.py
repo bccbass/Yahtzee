@@ -43,41 +43,8 @@ class Dice:
         print(Fore.YELLOW + position_string)
         print(Fore.RESET)
         
-
-# for Hand as LIST:
-    # def update_hand(self, baddies):
-    #     for die in baddies:
-    #         self.__hand.remove(die)
-    #     re_roll_x = len(baddies)
-    #     new_dice = self.roll(re_roll_x)
-    #     self.__hand += new_dice
-
-
-
-        
-        
-        
-
-    
-
     @classmethod
     def die(cls):
         return randint(1, 6)
-    @classmethod
-    def roll(cls, num_dice):
-        hand_cache = []
-        for _ in range(num_dice):
-            hand_cache.append(cls.die())
-        return hand_cache
-    @classmethod
-    def remove(cls, bad_dice, hand):
-        for die in bad_dice:
-            hand.remove(die)
-        return hand
-
-    @classmethod
-    def re_roll(cls, keeper_hand):
-        re_roll_x = 5 - len(keeper_hand)
-        new_dice = cls.roll(re_roll_x)
-        return keeper_hand + new_dice
-
+ 
+ 
