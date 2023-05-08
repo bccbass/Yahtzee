@@ -2,7 +2,6 @@ from card import three_kind, four_kind, full_house, sm_straight, lg_straight, ya
 from DiceClass import Dice
 
 class Card:
-    all_time_high = 0 #This will be global to the PlayerLog class and should be updated as PlayerLog.all_time_high = new high score 
     def __init__(self):
         self.game_board = {
             'Three of a Kind': None,

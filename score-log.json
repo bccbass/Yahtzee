@@ -1,10 +1,50 @@
 [
   {
-    "name": "Ben",
-    "high_score": 46,
-    "past_scores": [
-      46,
-      34
+    "all_time_high": [
+      "Ger",
+      52
     ]
+  },
+  {
+    "ben": {
+      "name": "Ben",
+      "high_score": 16,
+      "past_scores": [
+        16
+      ]
+    },
+    "newxxxx": {
+      "name": "newxxxx",
+      "high_score": 30,
+      "past_scores": [
+        30
+      ]
+    },
+    "al": {
+      "name": "al",
+      "high_score": 42,
+      "past_scores": [
+        42,
+        29
+      ]
+    },
+    "ger": {
+      "name": "Ger",
+      "high_score": 49,
+      "past_scores": [
+        23,
+        49,
+        12,
+        13
+      ]
+    },
+    "sososonew": {
+      "name": "sososonew",
+      "high_score": 18,
+      "past_scores": [
+        17,
+        18
+      ]
+    }
   }
 ]

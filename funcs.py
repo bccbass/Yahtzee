@@ -62,7 +62,7 @@ def round(dice, player):
 
 def game(player, dice):
     player.greet
-    subprocess.call(['tput', 'reset'])
+    # subprocess.call(['tput', 'reset'])
 
     # for i in range(len(player.card.game_board)):
     for i in range(2):
