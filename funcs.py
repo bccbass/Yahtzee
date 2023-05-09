@@ -21,11 +21,12 @@ def choose_category(evaluated_hand):
     i = int(input())
     return i - 1
 
-def wrap_up_message(log, player_name):
+def wrap_up_message(log, player):
     champion, all_time_high = log[0]['all_time_high']
-    name, high_score, past_scores = log[1][player_name.lower()].values()
+    name, high_score, past_scores = log[1][player.name.lower()].values()
     subprocess.call(['tput', 'reset'])
     print(Fore.CYAN + f.renderText(f'YAHTZEE!'))
+    player.show_card
     if past_scores[-1] == all_time_high:
         subprocess.call(['tput', 'reset'])
         print(Fore.CYAN + f.renderText(f'{champion} is the NEW CHAMPION!'))
@@ -33,16 +34,19 @@ def wrap_up_message(log, player_name):
     elif past_scores[-1] == high_score and len(past_scores) > 1:
         print(f'Congratulations! You have a new high score of {high_score}!!')
     else:
-        print(f'Your final score is {past_scores[-1]} points! Nice one, legend!')
+        print(f'Your final score is {past_scores[-1]} points! Nice one!')
 
 def play_again_prompt(game):
     while True:
-        again = input("Play again? (Y/n): ").lower()
+        again = input("\nPlay again? (Y/n): ").lower()
         if again == 'y':
             break
         elif again == 'n':
+            print('Bye!')
             sys.exit(0)
         else:
+            subprocess.call(['tput', 'reset'])
+            print(Fore.CYAN + f.renderText(f'YAHTZEE!'))
             print('Sorry, I didn\'t understand your response!')
     game()
 
@@ -121,11 +125,12 @@ def game(player, dice):
     # for i in range(len(player.card.game_board)):
     for i in range(2):
         subprocess.call(['tput', 'reset'])
-        print(Fore.CYAN + f.renderText(f'Round {Player.round}'))
+        print(Fore.CYAN + f.renderText(f'Round {Player.round}\n'))
         if Player.round == 1:
             player.greet
         round(dice, player)
         Player.round +=1
+    Player.round = 1
     # caluclates final score and adds it to final score on card
     player.card.calc_score()
 

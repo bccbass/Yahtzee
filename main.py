@@ -5,7 +5,7 @@ import colorama
 from colorama import Fore
 colorama.init()
 from pyfiglet import Figlet
-from playsound import playsound
+# from playsound import playsound
 
 colorama.init()
 
@@ -25,7 +25,7 @@ def main():
 
     current_players_log = player_from_log(log, player)
 
-
+    
 
 
     # playsound('./Yahtzee_Remix.mp3')
@@ -34,7 +34,7 @@ def main():
 
     log = log_final_score(player, log)
 
-    wrap_up_message(log, player.name)
+    wrap_up_message(log, player)
 
     with open('score-log.json', 'w') as f:
         json.dump(log, f, indent=2)
