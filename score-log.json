@@ -1,1 +1,39 @@
-[{"all_time_high": ["None", 0]}, {}]
+[
+  {
+    "all_time_high": [
+      "tom",
+      27
+    ]
+  },
+  {
+    "ben": {
+      "name": "ben",
+      "high_score": 16,
+      "past_scores": [
+        16,
+        15
+      ]
+    },
+    "gerry": {
+      "name": "gerry",
+      "high_score": 20,
+      "past_scores": [
+        20
+      ]
+    },
+    "tom": {
+      "name": "tom",
+      "high_score": 27,
+      "past_scores": [
+        27
+      ]
+    },
+    "lil champion": {
+      "name": "Lil Champion",
+      "high_score": 0,
+      "past_scores": [
+        0
+      ]
+    }
+  }
+]

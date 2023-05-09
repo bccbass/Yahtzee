@@ -71,16 +71,16 @@ def new_player_log(name): # Create a log dict to store user scores in JSON file
     'past_scores': []
     }
 
-def player_from_log(log, target_player):
-    try:    # find and return name if player is already in log.
-        if log[1][target_player.name.lower()]:
-            plyr = log[1][target_player.name.lower()]
-            return plyr
-    except:
-        target_player.new() # invoke method to change is_new to True on player instance
-        new_player = new_player_log(target_player.name) # create new log object for player 
-        log[1][target_player.name.lower()] = new_player # creates new log on json dict
-        return log[1][target_player.name.lower()] # returns current player
+# def player_from_log(log, target_player):
+#     try:    # find and return name if player is already in log.
+#         if log[1][target_player.name.lower()]:
+#             plyr = log[1][target_player.name.lower()]
+#             return plyr
+#     except:
+#         target_player.new() # invoke method to change is_new to True on player instance
+#         new_player = new_player_log(target_player.name) # create new log object for player 
+#         log[1][target_player.name.lower()] = new_player # creates new log on json dict
+#         return log[1][target_player.name.lower()] # returns current player
 
 
 def log_final_score(player, log):
@@ -96,7 +96,41 @@ def log_final_score(player, log):
         champion, all_time_high = log[0]["all_time_high"]
     return log
 
+def find_champions(log):
+    player_tuples = [(log[1][el]['name'], log[1][el]['high_score']) for el in log[1]]
+    high_scores = [el[1] for el in player_tuples]
+    high_scores.sort(reverse=True)
+    top_three = high_scores[:3]
+    champions = []
+    for num in top_three:
+        for plyr in player_tuples:
+            if num == plyr[1]:
+                champions.append(plyr)
+    return champions 
+
+def print_champions(log):
+    champions = find_champions(log)
+    def calc_space(rule, str):
+        res = ' '*(rule - len(str))
+        return res 
         
+    k_rule = 10
+    v_rule = 12
+    round = (
+'✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯',
+'✯   ✯✯✯ALL TIME CHAMPIONS✯✯✯   ✯',     
+'✯                              ✯',     
+'✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯')          
+    for line in round:
+        print(line)
+    for k,v in champions:
+        print(
+        f'✯     {k.upper()}{calc_space(k_rule, k)}   {v}{calc_space(v_rule, str(v))}✯'
+        )
+    print('✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯')
+
+
+
 
 # GAMEPLAY/GAMEFLOW
 def round(dice, player):

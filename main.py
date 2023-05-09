@@ -1,6 +1,6 @@
 import json
 from DiceClass import Dice
-from funcs import game, create_user_instance, log_final_score, wrap_up_message, player_from_log, play_again_prompt
+from funcs import game, create_user_instance, log_final_score, wrap_up_message,print_champions, play_again_prompt
 import colorama
 from colorama import Fore
 colorama.init()
@@ -23,7 +23,10 @@ def main():
     with open('score-log.json', 'r') as f: # open json file and set contents to var log
         log = json.load(f)
 
-    current_players_log = player_from_log(log, player)
+
+    
+            
+   
 
     
 
@@ -38,6 +41,8 @@ def main():
 
     with open('score-log.json', 'w') as f:
         json.dump(log, f, indent=2)
+
+    print_champions(log)
 
     play_again_prompt(main)
 
