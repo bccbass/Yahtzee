@@ -1,5 +1,6 @@
 from PlayerClass import Player
 import subprocess
+import sys
 import colorama
 from colorama import Fore, Back
 from pyfiglet import Figlet
@@ -23,13 +24,27 @@ def choose_category(evaluated_hand):
 def wrap_up_message(log, player_name):
     champion, all_time_high = log[0]['all_time_high']
     name, high_score, past_scores = log[1][player_name.lower()].values()
+    subprocess.call(['tput', 'reset'])
+    print(Fore.CYAN + f.renderText(f'YAHTZEE!'))
     if past_scores[-1] == all_time_high:
+        subprocess.call(['tput', 'reset'])
+        print(Fore.CYAN + f.renderText(f'{champion} is the NEW CHAMPION!'))
         print(f'Congratulations {champion}!! You have the all time high score of {all_time_high}!')
     elif past_scores[-1] == high_score and len(past_scores) > 1:
         print(f'Congratulations! You have a new high score of {high_score}!!')
     else:
-        print(f'Congratulations! You have {past_scores[-1]} points!')
+        print(f'Your final score is {past_scores[-1]} points! Nice one, legend!')
 
+def play_again_prompt(game):
+    while True:
+        again = input("Play again? (Y/n): ").lower()
+        if again == 'y':
+            break
+        elif again == 'n':
+            sys.exit(0)
+        else:
+            print('Sorry, I didn\'t understand your response!')
+    game()
 
 # GAME VARIABLE CONSTRUCTION
 def create_user_instance():
@@ -99,21 +114,20 @@ def round(dice, player):
     i = choose_category(formatted_categories)
     players_category_choice = valid_categories[i]
     player.card.update_round_points(players_category_choice, dice.list())
-    subprocess.call(['tput', 'reset'])
 
 
 
 def game(player, dice):
-    player.greet
-    # subprocess.call(['tput', 'reset'])
     # for i in range(len(player.card.game_board)):
     for i in range(2):
+        subprocess.call(['tput', 'reset'])
         print(Fore.CYAN + f.renderText(f'Round {Player.round}'))
+        if Player.round == 1:
+            player.greet
         round(dice, player)
         Player.round +=1
     # caluclates final score and adds it to final score on card
     player.card.calc_score()
 
-    # Print numbered elements on their own without brackets
         
     

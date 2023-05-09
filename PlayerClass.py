@@ -14,7 +14,7 @@ class Player:
         if not self.is_new:
             print(f'Welcome back {self.name}!')
         else:
-            print(f'Welcome to Yahtzee!')
+            print(f'Welcome to Yahtzee, {self.name}!')
 
     @property
     def show_card(self):
@@ -22,13 +22,13 @@ class Player:
             res = ' '*(rule - len(str))
             return res 
         
-        plyr_rule = 15
+        plyr_rule = 14
         k_rule = 16
         v_rule = 6
         round = (
 '┌────────────────────────────┐',
 f'│       ***Round {self.round}***        │ ',     
-f'│       {self.name}s Card{calc_space(plyr_rule, self.name)}│',     
+f'│       {self.name}\'s Card{calc_space(plyr_rule, self.name)}│',     
 '│────────────────────────────│ ')          
         for line in round:
             print(line)

@@ -1,14 +1,14 @@
 [
   {
     "all_time_high": [
-      "guy new",
-      52
+      "ben",
+      54
     ]
   },
   {
     "ben": {
       "name": "Ben",
-      "high_score": 50,
+      "high_score": 54,
       "past_scores": [
         16,
         39,
@@ -16,7 +16,14 @@
         13,
         46,
         14,
-        50
+        50,
+        52,
+        20,
+        42,
+        44,
+        16,
+        19,
+        54
       ]
     },
     "guy new": {
@@ -31,9 +38,41 @@
     },
     "xx": {
       "name": "xx",
-      "high_score": 19,
+      "high_score": 63,
       "past_scores": [
-        19
+        19,
+        63
+      ]
+    },
+    "newest123": {
+      "name": "Newest123",
+      "high_score": 56,
+      "past_scores": [
+        56
+      ]
+    },
+    "teddy": {
+      "name": "Teddy",
+      "high_score": 110,
+      "past_scores": [
+        110,
+        42
+      ]
+    },
+    "gerry": {
+      "name": "Gerry",
+      "high_score": 17,
+      "past_scores": [
+        17
+      ]
+    },
+    "lil champion": {
+      "name": "Lil Champion",
+      "high_score": 50,
+      "past_scores": [
+        24,
+        50,
+        30
       ]
     }
   }
