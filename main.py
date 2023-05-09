@@ -5,6 +5,7 @@ import colorama
 from colorama import Fore
 colorama.init()
 from pyfiglet import Figlet
+from playsound import playsound
 
 colorama.init()
 
@@ -27,7 +28,7 @@ def main():
 
 
 
-
+    # playsound('./Yahtzee_Remix.mp3')
     # Call game function to start:
     game(player, dice)
 
