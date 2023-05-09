@@ -15,6 +15,7 @@ class Card:
         self.test_hand = [three_kind, four_kind, full_house, sm_straight, lg_straight, yahtzee]
         self.final_score = 0
 
+
 # Calulates final score. This should only be called once, or else it will keep adding same card to final score.
     def calc_score(self):
         for k, v in self.game_board.items():
@@ -54,8 +55,4 @@ class Card:
 
 
 
-                
 
-# test = Card('Ben')
-# check = test.check_hand([1,1,1,2,2])
-# print(check)

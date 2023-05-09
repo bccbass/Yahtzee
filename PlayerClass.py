@@ -1,6 +1,7 @@
 from CardClass import Card
 
 class Player: 
+    round = 1
     def __init__(self, name='player'):
         self.is_new = False
         self.name = name
@@ -14,3 +15,25 @@ class Player:
             print(f'Welcome back {self.name}!')
         else:
             print(f'Welcome to Yahtzee!')
+
+    @property
+    def show_card(self):
+        def calc_space(rule, str):
+            res = ' '*(rule - len(str))
+            return res 
+        
+        plyr_rule = 15
+        k_rule = 16
+        v_rule = 6
+        round = (
+'┌────────────────────────────┐',
+f'│       ***Round {self.round}***        │ ',     
+f'│       {self.name}s Card{calc_space(plyr_rule, self.name)}│',     
+'│────────────────────────────│ ')          
+        for line in round:
+            print(line)
+        for k,v in self.card.game_board.items():
+            print(
+            f'│ *{k}*{calc_space(k_rule, k)}│  {v}{calc_space(v_rule, str(v))}│'
+            )
+        print('└────────────────────────────┘')

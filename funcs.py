@@ -20,18 +20,62 @@ def choose_category(evaluated_hand):
     i = int(input())
     return i - 1
 
+def wrap_up_message(log, player_name):
+    champion, all_time_high = log[0]['all_time_high']
+    name, high_score, past_scores = log[1][player_name.lower()].values()
+    if past_scores[-1] == all_time_high:
+        print(f'Congratulations {champion}!! You have the all time high score of {all_time_high}!')
+    elif past_scores[-1] == high_score and len(past_scores) > 1:
+        print(f'Congratulations! You have a new high score of {high_score}!!')
+    else:
+        print(f'Congratulations! You have {past_scores[-1]} points!')
 
+
+# GAME VARIABLE CONSTRUCTION
 def create_user_instance():
     # functionality to accept multiple players for extended features
     players = []
     player_instances = []
     # to refactor for multiple players us while loop to seed players
-    player = input('Who is playing? ')
+    player = input('Who is playing? ') or 'Lil Champion' #request player name, if '' default is given
     players.append(player)
     for player in players:
         new_instance = Player(player)
         player_instances.append(new_instance)
     return player_instances[0]
+
+
+def new_player_log(name): # Create a log dict to store user scores in JSON file 
+   return {
+    'name': name,
+    'high_score': 0,
+    'past_scores': []
+    }
+
+def player_from_log(log, target_player):
+    try:    # find and return name if player is already in log.
+        if log[1][target_player.name.lower()]:
+            plyr = log[1][target_player.name.lower()]
+            return plyr
+    except:
+        target_player.new() # invoke method to change is_new to True on player instance
+        new_player = new_player_log(target_player.name) # create new log object for player 
+        log[1][target_player.name.lower()] = new_player # creates new log on json dict
+        return log[1][target_player.name.lower()] # returns current player
+
+
+def log_final_score(player, log):
+    # update players scores for log
+    final_score = player.card.final_score
+    all_time_high = log[0]["all_time_high"][1]
+    player_log = log[1][player.name.lower()]
+    player_log['past_scores'].append(final_score)
+    if player_log['high_score'] < final_score:
+        player_log['high_score'] = final_score
+    if all_time_high < final_score:
+        log[0]["all_time_high"] = [player.name, final_score]
+        champion, all_time_high = log[0]["all_time_high"]
+    return log
 
         
 
@@ -39,7 +83,7 @@ def create_user_instance():
 def round(dice, player):
     chances = 2
     dice.new_roll()
-    print(player.card.game_board)
+    player.show_card    
     dice.hand
 
     while chances > 0:   
@@ -55,7 +99,6 @@ def round(dice, player):
     i = choose_category(formatted_categories)
     players_category_choice = valid_categories[i]
     player.card.update_round_points(players_category_choice, dice.list())
-    print(player.card.game_board)
     subprocess.call(['tput', 'reset'])
 
 
@@ -63,13 +106,11 @@ def round(dice, player):
 def game(player, dice):
     player.greet
     # subprocess.call(['tput', 'reset'])
-
     # for i in range(len(player.card.game_board)):
     for i in range(2):
-        print(Fore.CYAN + f.renderText('Yahtzee!'))
-        print(Fore.YELLOW + f'┌─────────┐\n│ ROUND {i+1} │\n└─────────┘')
-
+        print(Fore.CYAN + f.renderText(f'Round {Player.round}'))
         round(dice, player)
+        Player.round +=1
     # caluclates final score and adds it to final score on card
     player.card.calc_score()
 
