@@ -15,10 +15,16 @@ def remove_prompt():
     return parsed
 
 def choose_category(evaluated_hand):
-    print('What category would you like to apply hand to?:')
     cat_str = ' '.join([el for el in evaluated_hand])
-    print(Fore.YELLOW + cat_str)        
-    i = int(input())
+    while True:
+        try:
+            print('What category would you like to apply hand to?:')
+            print(Fore.YELLOW + cat_str)
+            i = int(input())
+            break
+        except ValueError:
+            print('Sorry, I didn\'t catch that!')
+
     return i - 1
 
 def wrap_up_message(log, player):
@@ -42,7 +48,7 @@ def play_again_prompt(game):
         if again == 'y':
             break
         elif again == 'n':
-            print('Bye!')
+            print('\nBye!\n')
             sys.exit(0)
         else:
             subprocess.call(['tput', 'reset'])
@@ -71,16 +77,16 @@ def new_player_log(name): # Create a log dict to store user scores in JSON file
     'past_scores': []
     }
 
-# def player_from_log(log, target_player):
-#     try:    # find and return name if player is already in log.
-#         if log[1][target_player.name.lower()]:
-#             plyr = log[1][target_player.name.lower()]
-#             return plyr
-#     except:
-#         target_player.new() # invoke method to change is_new to True on player instance
-#         new_player = new_player_log(target_player.name) # create new log object for player 
-#         log[1][target_player.name.lower()] = new_player # creates new log on json dict
-#         return log[1][target_player.name.lower()] # returns current player
+def player_from_log(log, target_player):
+    try:    # find and return name if player is already in log.
+        if log[1][target_player.name.lower()]:
+            plyr = log[1][target_player.name.lower()]
+            return plyr
+    except:
+        target_player.new() # invoke method to change is_new to True on player instance
+        new_player = new_player_log(target_player.name) # create new log object for player 
+        log[1][target_player.name.lower()] = new_player # creates new log on json dict
+        return log[1][target_player.name.lower()] # returns current player
 
 
 def log_final_score(player, log):
