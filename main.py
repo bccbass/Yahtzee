@@ -1,4 +1,5 @@
 import json
+import sys
 from DiceClass import Dice
 from funcs import game, create_user_instance, player_from_log, log_final_score, wrap_up_message,print_champions, play_again_prompt
 import colorama
@@ -13,7 +14,7 @@ colorama.init()
 def main():
     f = Figlet(font='slant', justify='center')
 
-    print(Fore.CYAN + f.renderText('Yahtzee!'))
+    print(Fore.CYAN + f.renderText('\nYahtzee!'))
 
     player = create_user_instance()
     # Initialize Dice object
@@ -22,7 +23,6 @@ def main():
 
     with open('score-log.json', 'r') as f: # open json file and set contents to var log
         log = json.load(f)
-    print_champions(log)
     player_from_log(log, player)
 
 
@@ -41,7 +41,6 @@ def main():
 
     wrap_up_message(log, player)
 
-    print_champions(log)
 
     with open('score-log.json', 'w') as f:
         json.dump(log, f, indent=2)

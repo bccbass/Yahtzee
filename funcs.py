@@ -5,25 +5,44 @@ import colorama
 from colorama import Fore, Back
 from pyfiglet import Figlet
 
+
 colorama.init()
 f = Figlet(font='slant', justify='center')
 
 # PROMPTS:
+def space(num):
+    return ' ' * num
+
+def input_handler(input):
+    if input.strip().lower() in ['q', 'quit'] or 'quit' in input.strip().lower():
+        sys.exit(0)
+    elif input.strip().lower() in ['h', 'help']:
+        help()
+
 def remove_prompt():
     remove = input("What dice would you like to reroll? (Input position of dice to re-roll. Press enter to keep hand): ")
-    parsed = [int(el) for el in remove if el.isdigit()]
+    input_handler(remove)
+    parsed = [int(el) for el in remove if el.isdigit() and 0 < int(el) < 6]
     return parsed
 
 def choose_category(evaluated_hand):
     cat_str = ' '.join([el for el in evaluated_hand])
+    valid_choice = [1]
+    for el in evaluated_hand:
+        valid_choice.append(valid_choice[-1]+1)
     while True:
         try:
             print('What category would you like to apply hand to?:')
             print(Fore.YELLOW + cat_str)
-            i = int(input())
-            break
+            i = input()
+            input_handler(i)
+            i = int(i)
+            if i in valid_choice:
+                break
+            else:
+                raise ValueError('Please choose valid a valid number')
         except ValueError:
-            print('Sorry, I didn\'t catch that!')
+            print('Please choose valid a valid number')
 
     return i - 1
 
@@ -31,29 +50,35 @@ def wrap_up_message(log, player):
     champion, all_time_high = log[0]['all_time_high']
     name, high_score, past_scores = log[1][player.name.lower()].values()
     subprocess.call(['tput', 'reset'])
-    print(Fore.CYAN + f.renderText(f'YAHTZEE!'))
-    player.show_card
-    if past_scores[-1] == all_time_high:
-        subprocess.call(['tput', 'reset'])
-        print(Fore.CYAN + f.renderText(f'{champion} is the NEW CHAMPION!'))
-        print(f'Congratulations {champion}!! You have the all time high score of {all_time_high}!')
-    elif past_scores[-1] == high_score and len(past_scores) > 1:
-        print(f'Congratulations! You have a new high score of {high_score}!!')
-    else:
-        print(f'Your final score is {past_scores[-1]} points! Nice one!')
+    space = ' ' * 16
+    next_screen = None
+    is_champion = False
+    while next_screen == None:
+        print(Fore.CYAN + f.renderText(f'Game Over!'))
+        player.show_card
+        if past_scores[-1] == all_time_high:
+            is_champion = player.name
+            # subprocess.call(['tput', 'reset'])
+            # print(Fore.CYAN + f.renderText(f'{champion} is the NEW CHAMPION!'))
+            print(space + f'Congratulations {champion}!! You have the all time high score of {all_time_high}!')
+        elif past_scores[-1] == high_score and len(past_scores) > 1:
+            print(space + f'Congratulations! You have a new high score of {high_score}!!')
+        else:
+            print(space + f'Your final score is {past_scores[-1]} points! Nice one!')
+        next_screen = input('\nPress <ENTER> to continue...')
+    print_champions(log, is_champion)
 
 def play_again_prompt(game):
     while True:
-        again = input("\nPlay again? (Y/n): ").lower()
+        again = input('\nPlay again? (Y/n) ').lower()
+        input_handler(again)
         if again == 'y':
             break
         elif again == 'n':
             print('\nBye!\n')
             sys.exit(0)
-        else:
-            subprocess.call(['tput', 'reset'])
-            print(Fore.CYAN + f.renderText(f'YAHTZEE!'))
-            print('Sorry, I didn\'t understand your response!')
+   
+        
     game()
 
 # GAME VARIABLE CONSTRUCTION
@@ -63,6 +88,7 @@ def create_user_instance():
     player_instances = []
     # to refactor for multiple players us while loop to seed players
     player = input('Who is playing? ') or 'Lil Champion' #request player name, if '' default is given
+    input_handler(player)
     players.append(player)
     for player in players:
         new_instance = Player(player)
@@ -114,28 +140,50 @@ def find_champions(log):
                 champions.append(plyr)
     return champions 
 
-def print_champions(log):
+def print_champions(log, champion):
+    subprocess.call(['tput', 'reset'])
+    if champion:
+        print(Fore.CYAN + f.renderText(f'{champion} is the NEW CHAMPION!'))
+    else:
+        print(Fore.CYAN + f.renderText(f'YAHTZEE!'))
     champions = find_champions(log)
     def calc_space(rule, str):
         res = ' '*(rule - len(str))
         return res 
         
-    k_rule = 10
+    k_rule = 12
     v_rule = 12
+    space = ' '*22
     round = (
-'✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯',
-'✯   ✯✯✯ALL TIME CHAMPIONS✯✯✯   ✯',     
-'✯                              ✯',     
-'✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯')          
+space +'✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯',
+space +'✯   ✯✯✯ALL TIME CHAMPIONS✯✯✯   ✯',     
+space +'✯                              ✯',     
+space +'✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯')          
     for line in round:
         print(line)
     for k,v in champions:
         print(
-        f'✯     {k.upper()}{calc_space(k_rule, k)}   {v}{calc_space(v_rule, str(v))}✯'
+       space + f'✯   {k.upper()}{calc_space(k_rule, k)}   {v}{calc_space(v_rule, str(v))}✯'
         )
-    print('✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯')
+    print(space +'✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯\r')
 
-
+def help():
+    justify = space(8)
+    msg = [
+        '\n',
+        '✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯'*3,
+        justify*3 + '     ✯      Welcome to Yahtzee!     ✯',
+        '✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯'*3,
+        '● Enter [Q]uit or [H]elp at any time',
+        '● The goal of the game is to get all categories of hands and earn the highest score.',
+        '● You can only check off one category per game, so choose wisely.',
+        '● If you cannot or do not want to fill a category in a round you can choose to take 0 points.',
+        '● Highest score wins!! Have fun!!',
+        '✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯'*3
+    ]
+    for line in msg:
+        print(Fore.CYAN + justify + line)
+        print(Fore.YELLOW)
 
 
 # GAMEPLAY/GAMEFLOW
@@ -162,8 +210,8 @@ def round(dice, player):
 
 
 def game(player, dice):
-    # for i in range(len(player.card.game_board)):
-    for i in range(2):
+    for i in range(len(player.card.game_board)):
+    # for i in range(2):
         subprocess.call(['tput', 'reset'])
         print(Fore.CYAN + f.renderText(f'Round {Player.round}\n'))
         if Player.round == 1:

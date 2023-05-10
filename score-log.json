@@ -1,39 +1,35 @@
 [
   {
     "all_time_high": [
-      "Gonzo",
-      55
+      "Ben",
+      57
     ]
   },
   {
-    "ben": {
-      "name": "Ben",
-      "high_score": 52,
-      "past_scores": [
-        52,
-        27
-      ]
-    },
     "lil champion": {
       "name": "Lil Champion",
-      "high_score": 45,
+      "high_score": 50,
       "past_scores": [
-        45
+        24,
+        42,
+        13,
+        19,
+        29,
+        18,
+        15,
+        23,
+        50,
+        15
       ]
     },
-    "elmo": {
-      "name": "Elmo",
-      "high_score": 30,
+    "ben": {
+      "name": "Ben",
+      "high_score": 57,
       "past_scores": [
-        30,
-        17
-      ]
-    },
-    "gonzo": {
-      "name": "Gonzo",
-      "high_score": 55,
-      "past_scores": [
-        55
+        57,
+        28,
+        18,
+        33
       ]
     }
   }
