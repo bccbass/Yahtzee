@@ -1,8 +1,8 @@
 [
   {
     "all_time_high": [
-      "Ben",
-      57
+      "Tedward",
+      156
     ]
   },
   {
@@ -30,6 +30,20 @@
         28,
         18,
         33
+      ]
+    },
+    "tedward": {
+      "name": "Tedward",
+      "high_score": 156,
+      "past_scores": [
+        156
+      ]
+    },
+    "benny": {
+      "name": "Benny",
+      "high_score": 80,
+      "past_scores": [
+        80
       ]
     }
   }
