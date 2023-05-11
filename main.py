@@ -1,7 +1,7 @@
 import json
-import sys
+import subprocess
 from DiceClass import Dice
-from funcs import game, create_user_instance, player_from_log, log_final_score, wrap_up_message,print_champions, play_again_prompt
+from funcs import game, create_user_instance, player_from_log, log_final_score, wrap_up_message, print_big_yahtzee, play_again_prompt
 import colorama
 from colorama import Fore
 colorama.init()
@@ -12,12 +12,10 @@ colorama.init()
 
 
 def main():
+    subprocess.call(['tput', 'reset'])
     f = Figlet(font='slant', justify='center')
 
-    def print_big_yahtzee():
-        print(Fore.CYAN + f.renderText('-------------'))
-        print(Fore.RED+f.renderText('Yahtzee!'), end='')
-        print(Fore.CYAN + f.renderText('-------------'))
+
 
             
     print_big_yahtzee()

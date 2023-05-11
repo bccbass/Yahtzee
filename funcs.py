@@ -79,9 +79,13 @@ def play_again_prompt(game):
         elif again == 'n':
             print('\nBye!\n')
             sys.exit(0)
-   
-        
     game()
+
+def print_big_yahtzee():
+    print(Fore.CYAN + f.renderText('-------------'))
+    print(Fore.RED+f.renderText('Yahtzee!'), end='')
+    print(Fore.CYAN + f.renderText('-------------'))
+
 
 # GAME VARIABLE CONSTRUCTION
 def create_user_instance():
@@ -147,7 +151,7 @@ def print_champions(log, champion):
     if champion:
         print(Fore.CYAN + f.renderText(f'{champion} is the NEW CHAMPION!'))
     else:
-        print(Fore.CYAN + f.renderText(f'YAHTZEE!'))
+        print_big_yahtzee()
     champions = find_champions(log)
     def calc_space(rule, str):
         res = ' '*(rule - len(str))
@@ -167,7 +171,7 @@ space +'✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯
         print(
        space + f'✯   {k.upper()}{calc_space(k_rule, k)}   {v}{calc_space(v_rule, str(v))}✯'
         )
-    print(space +'✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯\r')
+    print(space +'✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯\n\n')
 
 def help():
     justify = space(8)
