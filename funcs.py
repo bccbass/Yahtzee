@@ -14,6 +14,10 @@ def space(num):
     return ' ' * num
 
 def input_handler(input_res):
+    if input_res.strip().lower() == 'reset':
+        subprocess.call('./clear-score-log.sh')
+
+       
     if input_res.strip().lower() in ['q', 'quit'] or 'quit' in input_res.strip().lower():
         res = input('Quit game? (Y/n) ').lower()
         if 'y' in res:
@@ -22,7 +26,7 @@ def input_handler(input_res):
         help()
 
 def remove_prompt():
-    remove = input("What dice would you like to re-roll? (Input position of dice to re-roll and press <ENTER> OR press <Enter> to keep hand): ")
+    remove = input("What dice would you like to re-roll? (Input position of dice to re-roll and press <ENTER> OR just press <Enter> to keep hand): ")
     input_handler(remove)
     parsed = [int(el) for el in remove if el.isdigit() and 0 < int(el) < 6]
     return parsed
@@ -180,16 +184,22 @@ def help():
         '✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯'*3,
         justify*3 + '     ✯      Welcome to Yahtzee!     ✯',
         '✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯'*3,
-        '● Enter [Q]uit or [H]elp at any time',
+        '● Enter [Q]uit or [H]elp at any time.',
+        '● To clear the Game Log history type RESET and press <enter>',
         '● The goal of the game is to get all categories of hands and earn the highest score.',
         '● You can only check off one category per game, so choose wisely.',
         '● If you cannot or do not want to fill a category in a round you can choose to take 0 points.',
         '● Highest score wins!! Have fun!!',
+        # '**********PRESS ANY KEY TO CONTINUE**********',
         '✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯'*3
     ]
     for line in msg:
         print(Fore.CYAN + justify + line)
         print(Fore.YELLOW)
+
+
+
+
 
 
 # GAMEPLAY/GAMEFLOW
