@@ -29,11 +29,11 @@ class Player:
 '┌────────────────────────────┐',
 f'│       ***Round {self.round}***        │ ',     
 f'│       {self.name}\'s Card{calc_space(plyr_rule, self.name)}│',     
-'│────────────────────────────│ ')          
+'│────────────────────────────│')          
         for line in round:
             print(space + line)
         for k,v in self.card.game_board.items():
             print(
             space + f'│ *{k}*{calc_space(k_rule, k)}│  {v}{calc_space(v_rule, str(v))}│'
             )
-        print(space + '└────────────────────────────┘')
+        print(space + '└────────────────────────────┘\n\n')

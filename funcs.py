@@ -13,14 +13,16 @@ f = Figlet(font='slant', justify='center')
 def space(num):
     return ' ' * num
 
-def input_handler(input):
-    if input.strip().lower() in ['q', 'quit'] or 'quit' in input.strip().lower():
-        sys.exit(0)
-    elif input.strip().lower() in ['h', 'help']:
+def input_handler(input_res):
+    if input_res.strip().lower() in ['q', 'quit'] or 'quit' in input_res.strip().lower():
+        res = input('Quit game? (Y/n) ').lower()
+        if 'y' in res:
+            sys.exit(0)
+    elif input_res.strip().lower() in ['h', 'help']:
         help()
 
 def remove_prompt():
-    remove = input("What dice would you like to reroll? (Input position of dice to re-roll. Press enter to keep hand): ")
+    remove = input("What dice would you like to re-roll? (Input position of dice to re-roll and press <ENTER> OR press <Enter> to keep hand): ")
     input_handler(remove)
     parsed = [int(el) for el in remove if el.isdigit() and 0 < int(el) < 6]
     return parsed
@@ -187,20 +189,28 @@ def help():
 
 
 # GAMEPLAY/GAMEFLOW
-def round(dice, player):
-    chances = 2
-    dice.new_roll()
-    player.show_card    
+def print_round(dice, player, chances):
+    subprocess.call(['tput', 'reset'])
+    print(Fore.CYAN + f.renderText(f'Round {Player.round}\n'))
+    player.show_card
+    print(Fore.YELLOW + space(28) + f'***Roll {chances} of 3***')
     dice.hand
 
-    while chances > 0:   
+def round(dice, player):
+    chances =  1
+    dice.new_roll()
+    print_round(dice, player, chances)
+    
+    while chances < 3:
         res = remove_prompt()
         if not len(res):
             break
         else:
             dice.update_hand(res)
-            dice.hand
-            chances -= 1
+            chances += 1
+            print_round(dice, player, chances)
+           
+
     valid_categories = player.card.check_hand(dice.list())
     formatted_categories = player.card.enum_categories(valid_categories)
     i = choose_category(formatted_categories)

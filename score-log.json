@@ -1,17 +1,1 @@
-[
-  {
-    "all_time_high": [
-      "Tedward",
-      165
-    ]
-  },
-  {
-    "tedward": {
-      "name": "Tedward",
-      "high_score": 165,
-      "past_scores": [
-        165
-      ]
-    }
-  }
-]
+[{"all_time_high": ["None", 0]}, {}]

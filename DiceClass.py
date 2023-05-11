@@ -35,11 +35,11 @@ class Dice:
     def print_hand(self):
         for i in range(5):
             for die in self.__hand.values():
-                print(Fore.YELLOW + dice_art[die][i], end=Fore.RESET+'   ')
+                print(Fore.YELLOW + ' ' + dice_art[die][i], end=Fore.RESET+'   ')
             print(' ')
         position_string = ''
         for key in self.__hand.keys():
-            position_string += f'   Die {str(key)}      '
+            position_string += f'    Die {str(key)}      '
         print(Fore.YELLOW + position_string)
         print(Fore.RESET)
         
