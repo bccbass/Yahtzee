@@ -2,48 +2,15 @@
   {
     "all_time_high": [
       "Tedward",
-      156
+      165
     ]
   },
   {
-    "lil champion": {
-      "name": "Lil Champion",
-      "high_score": 50,
-      "past_scores": [
-        24,
-        42,
-        13,
-        19,
-        29,
-        18,
-        15,
-        23,
-        50,
-        15
-      ]
-    },
-    "ben": {
-      "name": "Ben",
-      "high_score": 57,
-      "past_scores": [
-        57,
-        28,
-        18,
-        33
-      ]
-    },
     "tedward": {
       "name": "Tedward",
-      "high_score": 156,
+      "high_score": 165,
       "past_scores": [
-        156
-      ]
-    },
-    "benny": {
-      "name": "Benny",
-      "high_score": 80,
-      "past_scores": [
-        80
+        165
       ]
     }
   }

@@ -12,7 +12,7 @@ class Player:
     @property
     def greet(self):
         if not self.is_new:
-            print(f'Welcome back {self.name}!')
+            print(f'Welcome back, {self.name}!')
         else:
             print(f'Welcome to Yahtzee, {self.name}!')
 

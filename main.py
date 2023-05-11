@@ -14,7 +14,13 @@ colorama.init()
 def main():
     f = Figlet(font='slant', justify='center')
 
-    print(Fore.CYAN + f.renderText('\nYahtzee!'))
+    def print_big_yahtzee():
+        print(Fore.CYAN + f.renderText('-------------'))
+        print(Fore.RED+f.renderText('Yahtzee!'), end='')
+        print(Fore.CYAN + f.renderText('-------------'))
+
+            
+    print_big_yahtzee()
 
     player = create_user_instance()
     # Initialize Dice object
