@@ -2,7 +2,7 @@ import json
 import sys
 import subprocess
 from DiceClass import Dice
-from funcs import check_py_version, game, create_user_instance, player_from_log, log_final_score, wrap_up_message, print_big_yahtzee, play_again_prompt
+from funcs import check_py_version, game, init_log_file, quit_game, reset_game_history, create_user_instance, player_from_log, log_final_score, wrap_up_message, print_big_yahtzee, play_again_prompt
 import colorama
 from colorama import Fore
 colorama.init()
@@ -20,8 +20,11 @@ def main():
     player = create_user_instance()
     # Initialize Dice object
     dice = Dice()
-    with open('score-log.json', 'r') as f: # open json file and set contents to var log
-        log = json.load(f)
+    log = init_log_file()
+
+
+        # raise Exception('Failed to open')
+    
     player_from_log(log, player)
     # playsound('./Yahtzee_Remix.mp3')
     # Call game function to start:

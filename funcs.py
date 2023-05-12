@@ -1,6 +1,7 @@
 from PlayerClass import Player
 import subprocess
 import sys
+import json
 import colorama
 from colorama import Fore, Back
 from pyfiglet import Figlet
@@ -45,9 +46,9 @@ def match_request(req_key):
         case 'h':
             help()
         case 'q':
-            quit()
+            quit_game()
 
-def quit():
+def quit_game():
     res = None
     while res != 'y':
         res = input('Quit game? (Y/n) ').lower()
@@ -56,13 +57,34 @@ def quit():
         if 'n' in res:
             break
 
+def init_log_file():
+    try:
+        with open('score-log.json', 'r') as f: # open json file and set contents to var log
+            log = json.load(f)
+    except:
+        res = None
+        while res != 'r':
+            res = input('Whoops!! Cannot find \'scores-log.json\'. Would you like to [R]eset Game Log or [Q]uit? ' ).strip().lower()
+            if res == 'r': 
+                reset_game_history()
+                with open('score-log.json', 'r') as f: # open json file and set contents to var log
+                    log = json.load(f)
+            if res.lower() == 'q':
+                    quit_game()
+            else:
+                print('Please enter a valid input ([Q]uit or [R]eset)')
+    return log
+
+def reset_game_history():
+    subprocess.call('./clear-score-log.sh')
+    print(Fore.GREEN + 'Game history cleared!' + Fore.YELLOW)
+
 def input_handler(input_res):
     parsed_input = input_res.strip().lower()
     if parsed_input == 'reset':
-        subprocess.call('./clear-score-log.sh')
-        print(Fore.GREEN + 'Game history cleared!' + Fore.YELLOW)
+        reset_game_history()
     if parsed_input in ['q', 'quit'] or 'quit' in parsed_input:
-        quit()
+        quit_game()
     elif parsed_input in ['h', 'help']:
         help()
 
