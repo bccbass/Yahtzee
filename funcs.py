@@ -26,12 +26,26 @@ def space(num):
 def input_handler(input_res):
     if input_res.strip().lower() == 'reset':
         subprocess.call('./clear-score-log.sh')
+        print(Fore.GREEN + 'Game history cleared!' + Fore.YELLOW)
     if input_res.strip().lower() in ['q', 'quit'] or 'quit' in input_res.strip().lower():
         res = input('Quit game? (Y/n) ').lower()
         if 'y' in res:
             sys.exit(0)
     elif input_res.strip().lower() in ['h', 'help']:
         help()
+
+# def remove_prompt():
+#     remove = input("What dice would you like to re-roll? (Input position of dice to re-roll and press <ENTER> OR just press <Enter> to keep hand): ")
+#     while True:
+#         remove = input("What dice would you like to re-roll? (Input position of dice to re-roll and press <ENTER> OR just press <Enter> to keep hand): ")
+#         input_handler(remove)
+#         for el in remove:
+#             if el not in '12345':
+#                 print("Please enter valid dice numbers only")
+#         else:
+#             parsed = [int(el) for el in remove if el.isdigit() and 0 < int(el) < 6]
+#             return parsed
+
 
 def remove_prompt():
     remove = input("What dice would you like to re-roll? (Input position of dice to re-roll and press <ENTER> OR just press <Enter> to keep hand): ")
@@ -100,6 +114,7 @@ def print_big_yahtzee():
 
 
 # GAME VARIABLE CONSTRUCTION
+
 def create_user_instance():
     # functionality to accept multiple players for extended features
     players = []
