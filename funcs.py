@@ -9,6 +9,16 @@ from pyfiglet import Figlet
 colorama.init()
 f = Figlet(font='slant', justify='center')
 
+# Version Check:
+def check_py_version():
+    py_v_major = int(sys.version_info[0])
+    py_v_minor = int(sys.version_info[1])
+    if py_v_major < 3 and py_v_minor < 10:
+        print('Yahtzee requires Python version 3.10 or higher\nVisit https://www.python.org/downloads/ for more information')
+        sys.exit(1)
+
+
+
 # PROMPTS:
 def space(num):
     return ' ' * num

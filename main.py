@@ -1,7 +1,8 @@
 import json
+import sys
 import subprocess
 from DiceClass import Dice
-from funcs import game, create_user_instance, player_from_log, log_final_score, wrap_up_message, print_big_yahtzee, play_again_prompt
+from funcs import check_py_version, game, create_user_instance, player_from_log, log_final_score, wrap_up_message, print_big_yahtzee, play_again_prompt
 import colorama
 from colorama import Fore
 colorama.init()
@@ -14,6 +15,7 @@ colorama.init()
 def main():
     subprocess.call(['tput', 'reset'])
     f = Figlet(font='slant', justify='center')
+    check_py_version() #check to make sure installed python version is compatible Yahtzee
     print_big_yahtzee()
     player = create_user_instance()
     # Initialize Dice object
