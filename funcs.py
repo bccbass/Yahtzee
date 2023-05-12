@@ -23,16 +23,49 @@ def check_py_version():
 def space(num):
     return ' ' * num
 
+
+# THIS IS ONLY WORKING WITH SINGLE LETTERS, NOT FULL WORD RESET OR HELP OR QUIT
+# INPUT HANDLER WITH SAME LOGIC IS WORKING. DONT KNOW WHY
+def input_filter(input_res):
+    parsed_input = input_res.strip().lower()
+    if parsed_input == 'reset':
+        return 'r'
+    if parsed_input in ['q', 'quit'] or 'quit' in parsed_input:
+        return 'q'
+    elif parsed_input in ['h', 'help']:
+        return 'h'
+    else:
+        return False
+
+def match_request(req_key):
+    match req_key:
+        case 'r':
+            print('Im trying!')
+            subprocess.call('./clear-score-log.sh')
+            print(Fore.GREEN + 'Game history cleared!' + Fore.YELLOW)
+        case 'h':
+            help()
+        case 'q':
+            res = None
+            while res != 'y':
+                res = input('Quit game? (Y/n) ').lower()
+                if 'y' in res:
+                    sys.exit(0)
+                if 'n' in res:
+                    break
+
 def input_handler(input_res):
-    if input_res.strip().lower() == 'reset':
+    parsed_input = input_res.strip().lower()
+    if parsed_input == 'reset':
         subprocess.call('./clear-score-log.sh')
         print(Fore.GREEN + 'Game history cleared!' + Fore.YELLOW)
-    if input_res.strip().lower() in ['q', 'quit'] or 'quit' in input_res.strip().lower():
+    if parsed_input in ['q', 'quit'] or 'quit' in parsed_input:
         res = input('Quit game? (Y/n) ').lower()
         if 'y' in res:
             sys.exit(0)
-    elif input_res.strip().lower() in ['h', 'help']:
+    elif parsed_input in ['h', 'help']:
         help()
+
 
 # def remove_prompt():
 #     remove = input("What dice would you like to re-roll? (Input position of dice to re-roll and press <ENTER> OR just press <Enter> to keep hand): ")
@@ -46,12 +79,45 @@ def input_handler(input_res):
 #             parsed = [int(el) for el in remove if el.isdigit() and 0 < int(el) < 6]
 #             return parsed
 
+# def is_valid_die(dice_str):
+#     if type(dice_str) == 'string':
+#         try:
+#             for die in dice_str:
+#                 if 0 < int(die) < 6:
+#                     continue
+#         except ValueError("Please enter valid die numbers"):
+#             return False
+#         return True
+#     else:
+#         return False
+def is_valid_die(dice_str):
+    if type(dice_str) == str:
+        for die in dice_str:
+            if die.isdigit() and 0 < int(die) < 6:
+                continue
+            else: 
+                return False
+        return True
+
+
 
 def remove_prompt():
-    remove = input("What dice would you like to re-roll? (Input position of dice to re-roll and press <ENTER> OR just press <Enter> to keep hand): ")
-    input_handler(remove)
-    parsed = [int(el) for el in remove if el.isdigit() and 0 < int(el) < 6]
-    return parsed
+    dice = 'No dice'
+    while not is_valid_die(dice):
+        dice = input(Fore.RESET + "What dice would you like to re-roll? (Enter input position of dice to re-roll (1-5) and press <ENTER> OR just press <Enter> to keep hand): ")
+        if input_filter(dice):
+            match_request(dice)
+        elif not is_valid_die(dice):
+            print("Enter valid die numbers (1-5)")
+        else:
+            parsed_dice = [int(die) for die in dice]
+            return parsed_dice
+
+# def remove_prompt():
+#     remove = input("What dice would you like to re-roll? (Input position of dice to re-roll and press <ENTER> OR just press <Enter> to keep hand): ")
+#     input_handler(remove)
+#     parsed = [int(el) for el in remove if el.isdigit() and 0 < int(el) < 6]
+#     return parsed
 
 def choose_category(evaluated_hand):
     cat_str = ' '.join([el for el in evaluated_hand])
@@ -219,6 +285,10 @@ def help():
     for line in msg:
         print(Fore.CYAN + justify + line)
         print(Fore.YELLOW)
+    res = None
+    while res == None:
+        res = input('Press <ENTER> to continue\n')
+
 
 
 # GAMEPLAY/GAMEFLOW
