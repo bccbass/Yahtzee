@@ -41,10 +41,9 @@ def input_filter(input_res):
 def match_request(req_key):
     match req_key:
         case 'r':
-            subprocess.call('./clear-score-log.sh')
-            print(Fore.GREEN + 'Game history cleared!' + Fore.YELLOW)
+            reset_game_history()
         case 'h':
-            help()
+            show_help()
         case 'q':
             quit_game()
 
@@ -86,7 +85,7 @@ def input_handler(input_res):
     if parsed_input in ['q', 'quit'] or 'quit' in parsed_input:
         quit_game()
     elif parsed_input in ['h', 'help']:
-        help()
+        show_help()
 
 
 # def remove_prompt():
@@ -289,7 +288,7 @@ space +'✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯
         )
     print(space +'✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯\n\n')
 
-def help():
+def show_help():
     justify = space(8)
     msg = [
         '\n',
