@@ -16,8 +16,6 @@ def space(num):
 def input_handler(input_res):
     if input_res.strip().lower() == 'reset':
         subprocess.call('./clear-score-log.sh')
-
-       
     if input_res.strip().lower() in ['q', 'quit'] or 'quit' in input_res.strip().lower():
         res = input('Quit game? (Y/n) ').lower()
         if 'y' in res:
@@ -198,10 +196,6 @@ def help():
         print(Fore.YELLOW)
 
 
-
-
-
-
 # GAMEPLAY/GAMEFLOW
 def print_round(dice, player, chances):
     subprocess.call(['tput', 'reset'])
@@ -230,8 +224,6 @@ def round(dice, player):
     i = choose_category(formatted_categories)
     players_category_choice = valid_categories[i]
     player.card.update_round_points(players_category_choice, dice.list())
-
-
 
 def game(player, dice):
     for i in range(len(player.card.game_board)):
