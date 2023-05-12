@@ -40,19 +40,21 @@ def input_filter(input_res):
 def match_request(req_key):
     match req_key:
         case 'r':
-            print('Im trying!')
             subprocess.call('./clear-score-log.sh')
             print(Fore.GREEN + 'Game history cleared!' + Fore.YELLOW)
         case 'h':
             help()
         case 'q':
-            res = None
-            while res != 'y':
-                res = input('Quit game? (Y/n) ').lower()
-                if 'y' in res:
-                    sys.exit(0)
-                if 'n' in res:
-                    break
+            quit()
+
+def quit():
+    res = None
+    while res != 'y':
+        res = input('Quit game? (Y/n) ').lower()
+        if 'y' in res:
+            sys.exit(0)
+        if 'n' in res:
+            break
 
 def input_handler(input_res):
     parsed_input = input_res.strip().lower()
@@ -60,9 +62,7 @@ def input_handler(input_res):
         subprocess.call('./clear-score-log.sh')
         print(Fore.GREEN + 'Game history cleared!' + Fore.YELLOW)
     if parsed_input in ['q', 'quit'] or 'quit' in parsed_input:
-        res = input('Quit game? (Y/n) ').lower()
-        if 'y' in res:
-            sys.exit(0)
+        quit()
     elif parsed_input in ['h', 'help']:
         help()
 
@@ -105,8 +105,9 @@ def remove_prompt():
     dice = 'No dice'
     while not is_valid_die(dice):
         dice = input(Fore.RESET + "What dice would you like to re-roll? (Enter input position of dice to re-roll (1-5) and press <ENTER> OR just press <Enter> to keep hand): ")
-        if input_filter(dice):
-            match_request(dice)
+        filter_res = input_filter(dice)
+        if filter_res: 
+            match_request(filter_res)
         elif not is_valid_die(dice):
             print("Enter valid die numbers (1-5)")
         else:
@@ -127,7 +128,7 @@ def choose_category(evaluated_hand):
     while True:
         try:
             print('What category would you like to apply hand to?:')
-            print(Fore.YELLOW + cat_str)
+            print(Fore.YELLOW + cat_str + Fore.RESET)
             i = input()
             input_handler(i)
             i = int(i)
@@ -287,7 +288,7 @@ def help():
         print(Fore.YELLOW)
     res = None
     while res == None:
-        res = input('Press <ENTER> to continue\n')
+        res = input(space(43) + 'Press <ENTER> to continue\n')
 
 
 
