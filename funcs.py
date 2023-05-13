@@ -24,9 +24,6 @@ def check_py_version():
 def space(num):
     return ' ' * num
 
-
-# THIS IS ONLY WORKING WITH SINGLE LETTERS, NOT FULL WORD RESET OR HELP OR QUIT
-# INPUT HANDLER WITH SAME LOGIC IS WORKING. DONT KNOW WHY
 def input_filter(input_res):
     parsed_input = input_res.strip().lower()
     if parsed_input == 'reset':
@@ -78,39 +75,15 @@ def reset_game_history():
     subprocess.call('./clear-score-log.sh')
     print(Fore.GREEN + 'Game history cleared!' + Fore.YELLOW)
 
-def input_handler(input_res):
-    parsed_input = input_res.strip().lower()
-    if parsed_input == 'reset':
-        reset_game_history()
-    if parsed_input in ['q', 'quit'] or 'quit' in parsed_input:
-        quit_game()
-    elif parsed_input in ['h', 'help']:
-        show_help()
+# def input_handler(input_res):
+#     parsed_input = input_res.strip().lower()
+#     if parsed_input == 'reset':
+#         reset_game_history()
+#     if parsed_input in ['q', 'quit'] or 'quit' in parsed_input:
+#         quit_game()
+#     elif parsed_input in ['h', 'help']:
+#         show_help()
 
-
-# def remove_prompt():
-#     remove = input("What dice would you like to re-roll? (Input position of dice to re-roll and press <ENTER> OR just press <Enter> to keep hand): ")
-#     while True:
-#         remove = input("What dice would you like to re-roll? (Input position of dice to re-roll and press <ENTER> OR just press <Enter> to keep hand): ")
-#         input_handler(remove)
-#         for el in remove:
-#             if el not in '12345':
-#                 print("Please enter valid dice numbers only")
-#         else:
-#             parsed = [int(el) for el in remove if el.isdigit() and 0 < int(el) < 6]
-#             return parsed
-
-# def is_valid_die(dice_str):
-#     if type(dice_str) == 'string':
-#         try:
-#             for die in dice_str:
-#                 if 0 < int(die) < 6:
-#                     continue
-#         except ValueError("Please enter valid die numbers"):
-#             return False
-#         return True
-#     else:
-#         return False
 def is_valid_die(dice_str):
     if type(dice_str) == str:
         for die in dice_str:
@@ -119,8 +92,6 @@ def is_valid_die(dice_str):
             else: 
                 return False
         return True
-
-
 
 def remove_prompt():
     dice = 'No dice'
@@ -135,12 +106,6 @@ def remove_prompt():
             parsed_dice = [int(die) for die in dice]
             return parsed_dice
 
-# def remove_prompt():
-#     remove = input("What dice would you like to re-roll? (Input position of dice to re-roll and press <ENTER> OR just press <Enter> to keep hand): ")
-#     input_handler(remove)
-#     parsed = [int(el) for el in remove if el.isdigit() and 0 < int(el) < 6]
-#     return parsed
-
 def choose_category(evaluated_hand):
     cat_str = ' '.join([el for el in evaluated_hand])
     valid_choice = [1]
@@ -151,7 +116,6 @@ def choose_category(evaluated_hand):
             print('What category would you like to apply hand to?:')
             print(Fore.YELLOW + cat_str + Fore.RESET)
             i = input()
-            # input_handler(i)
             req_filter = input_filter(i)
             if req_filter:
                 match_request(req_filter)
@@ -161,8 +125,6 @@ def choose_category(evaluated_hand):
                 return int(i) - 1
         except ValueError:
             print('Please choose valid a valid number')
-
-    
 
 def wrap_up_message(log, player):
     champion, all_time_high = log[0]['all_time_high']
@@ -189,7 +151,8 @@ def wrap_up_message(log, player):
 def play_again_prompt(game):
     while True:
         again = input('\nPlay again? (Y/n) ').lower()
-        input_handler(again)
+        input_req = input_filter(again)
+        match_request(input_req)
         if again == 'y':
             break
         elif again == 'n':
@@ -201,6 +164,7 @@ def print_big_yahtzee():
     print(Fore.CYAN + f.renderText('-------------'))
     print(Fore.RED+f.renderText('Yahtzee!'), end='')
     print(Fore.CYAN + f.renderText('-------------'))
+    print(Fore.RESET)
 
 
 # GAME VARIABLE CONSTRUCTION
@@ -213,7 +177,6 @@ def create_user_instance():
     player = None
     while True:
         player = input('Who is playing? ') or 'Lil Champion' #request player name, if '' default is given
-        # input_handler(player)
         req_filter = input_filter(player)
         if req_filter:
             match_request(req_filter)
@@ -284,21 +247,26 @@ def print_champions(log, champion):
         res = ' '*(rule - len(str))
         return res 
         
-    k_rule = 12
-    v_rule = 12
-    space = ' '*22
+    k_rule = 20
+    v_rule = 4
+    space = ' '*18
     round = (
-space +'✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯',
-space +'✯   ✯✯✯ALL TIME CHAMPIONS✯✯✯   ✯',     
-space +'✯                              ✯',     
-space +'✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯')          
+space +'✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯',
+space +'✯                                     ✯',     
+space +'✯     ✯✯✯ ALL TIME CHAMPIONS ✯✯✯      ✯',     
+space +'✯                                     ✯',     
+space +'✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯',
+space + '✯' + ' '*37 + '✯'
+) 
+    count = 1
     for line in round:
         print(line)
     for k,v in champions:
         print(
-       space + f'✯   {k.upper()}{calc_space(k_rule, k)}   {v}{calc_space(v_rule, str(v))}✯'
-        )
-    print(space +'✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯\n\n')
+        space + f'✯   #{count} {k.upper()}{calc_space(k_rule, k)}   {v}{calc_space(v_rule, str(v))}    ✯')
+        print(space + '✯' + ' '*37 + '✯')
+        count += 1
+    print(space +'✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯\n\n' + Fore.RESET)
 
 def show_help():
     justify = space(8)
@@ -311,17 +279,15 @@ def show_help():
         '● To clear the Game Log history type RESET and press <ENTER>',
         '● The goal of the game is to get all categories of hands and earn the highest score.',
         '● You can only check off one category per game, so choose wisely.',
-        '● If you cannot or do not want to fill a category in a round you can choose to take 0 points.',
         '● Highest score wins!! Have fun!!',
-        # '**********PRESS ANY KEY TO CONTINUE**********',
-        '✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯'*3
+        '✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯'*3 + Fore.RESET
     ]
     for line in msg:
-        print(Fore.CYAN + justify + line)
-        print(Fore.YELLOW)
+        print(Fore.CYAN + justify + line + '\n')
+    print(Fore.YELLOW)
     res = None
     while res == None:
-        res = input(space(43) + 'Press <ENTER> to continue\n')
+        res = input(space(40) + 'Press <ENTER> to continue\n' + Fore.RESET)
   
 
 
@@ -359,10 +325,9 @@ def round(dice, player):
 
 def game(player, dice):
     for i in range(len(player.card.game_board)):
-    # for i in range(2):
         subprocess.call(['tput', 'reset'])
         print(Fore.CYAN + f.renderText(f'Round {Player.round}\n'))
-        if Player.round == 1:
+        if player.round == 1:
             player.greet
         round(dice, player)
         Player.round +=1
