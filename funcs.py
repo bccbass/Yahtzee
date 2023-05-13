@@ -155,7 +155,7 @@ def choose_category(evaluated_hand):
             req_filter = input_filter(i)
             if req_filter:
                 match_request(req_filter)
-            elif i not in valid_choice:
+            elif int(i) not in valid_choice:
                 raise ValueError('Please choose valid a valid number')
             else:
                 return int(i) - 1
@@ -322,6 +322,9 @@ def show_help():
     res = None
     while res == None:
         res = input(space(43) + 'Press <ENTER> to continue\n')
+  
+
+
 
 
 
