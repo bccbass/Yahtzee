@@ -125,7 +125,7 @@ def is_valid_die(dice_str):
 def remove_prompt():
     dice = 'No dice'
     while not is_valid_die(dice):
-        dice = input(Fore.RESET + "What dice would you like to re-roll? (Enter input position of dice to re-roll (1-5) and press <ENTER> OR just press <Enter> to keep hand): ")
+        dice = input(Fore.RESET + "What dice would you like to re-roll? (Enter input position of dice to re-roll (1-5) and press <ENTER> or press <ENTER> to keep hand): ")
         filter_res = input_filter(dice)
         if filter_res: 
             match_request(filter_res)
@@ -151,16 +151,18 @@ def choose_category(evaluated_hand):
             print('What category would you like to apply hand to?:')
             print(Fore.YELLOW + cat_str + Fore.RESET)
             i = input()
-            input_handler(i)
-            i = int(i)
-            if i in valid_choice:
-                break
-            else:
+            # input_handler(i)
+            req_filter = input_filter(i)
+            if req_filter:
+                match_request(req_filter)
+            elif i not in valid_choice:
                 raise ValueError('Please choose valid a valid number')
+            else:
+                return int(i) - 1
         except ValueError:
             print('Please choose valid a valid number')
 
-    return i - 1
+    
 
 def wrap_up_message(log, player):
     champion, all_time_high = log[0]['all_time_high']
@@ -208,9 +210,19 @@ def create_user_instance():
     players = []
     player_instances = []
     # to refactor for multiple players us while loop to seed players
-    player = input('Who is playing? ') or 'Lil Champion' #request player name, if '' default is given
-    input_handler(player)
-    players.append(player)
+    player = None
+    while True:
+        player = input('Who is playing? ') or 'Lil Champion' #request player name, if '' default is given
+        # input_handler(player)
+        req_filter = input_filter(player)
+        if req_filter:
+            match_request(req_filter)
+            continue
+        elif len(player) > 16:
+            print('Players names have a maximum length of 16')
+        else:
+            players.append(player)
+            break
     for player in players:
         new_instance = Player(player)
         player_instances.append(new_instance)
@@ -296,7 +308,7 @@ def show_help():
         justify*3 + '     ✯      Welcome to Yahtzee!     ✯',
         '✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯✯'*3,
         '● Enter [Q]uit or [H]elp at any time.',
-        '● To clear the Game Log history type RESET and press <enter>',
+        '● To clear the Game Log history type RESET and press <ENTER>',
         '● The goal of the game is to get all categories of hands and earn the highest score.',
         '● You can only check off one category per game, so choose wisely.',
         '● If you cannot or do not want to fill a category in a round you can choose to take 0 points.',
