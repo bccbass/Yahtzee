@@ -17,7 +17,7 @@ f = Figlet(font='slant', justify='center')
 def check_py_version():
     py_v_major = int(sys.version_info[0])
     py_v_minor = int(sys.version_info[1])
-    if py_v_major < 3 and py_v_minor < 10:
+    if py_v_major < 3 or py_v_major == 3 and py_v_minor < 10:
         print('Yahtzee requires Python version 3.10 or higher')
         print('Visit https://www.python.org/downloads/ for more information')
         sys.exit(1)
