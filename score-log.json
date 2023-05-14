@@ -26,6 +26,13 @@
       "past_scores": [
         95
       ]
+    },
+    "ben": {
+      "name": "Ben",
+      "high_score": 38,
+      "past_scores": [
+        38
+      ]
     }
   }
 ]
