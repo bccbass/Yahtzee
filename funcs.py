@@ -272,15 +272,11 @@ def game(player, dice):
         round(dice, player)
         Player.round += 1
     Player.round = 1
-    # caluclates final score and adds it to final score on card
+    # calculates final score and adds it to final score on card
     player.card.calc_score()
 
 
 def create_user_instance():
-    # functionality to accept multiple players for extended features
-    players = []
-    player_instances = []
-    # to refactor for multiple players us while loop to seed players
     player = None
     while True:
         player = input('Who is playing? ') or 'Lil Champion'  # request player name, if '' default is given
@@ -291,12 +287,7 @@ def create_user_instance():
         elif len(player) > 16:
             print('Players names have a maximum length of 16')
         else:
-            players.append(player)
-            break
-    for player in players:
-        new_instance = Player(player)
-        player_instances.append(new_instance)
-    return player_instances[0]
+            return Player(player)
 
 
 def round(dice, player):
