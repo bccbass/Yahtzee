@@ -1,7 +1,8 @@
 import pytest
 
 from Classes import Dice
-from card import yahtzee, sm_straight, lg_straight, three_kind, four_kind, full_house
+from card import (yahtzee, sm_straight, lg_straight, 
+                  three_kind, four_kind, full_house)
 
 
 def test_dice():

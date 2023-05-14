@@ -4,7 +4,8 @@ import colorama
 from colorama import Fore
 
 from diceArt import dice_art
-from card import three_kind, four_kind, full_house, sm_straight, lg_straight, yahtzee
+from card import (three_kind, four_kind, 
+                  full_house, sm_straight, lg_straight, yahtzee)
 
 colorama.init()
 

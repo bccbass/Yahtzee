@@ -18,7 +18,8 @@ def check_py_version():
     py_v_major = int(sys.version_info[0])
     py_v_minor = int(sys.version_info[1])
     if py_v_major < 3 and py_v_minor < 10:
-        print('Yahtzee requires Python version 3.10 or higher\nVisit https://www.python.org/downloads/ for more information')
+        print('Yahtzee requires Python version 3.10 or higher')
+        print('Visit https://www.python.org/downloads/ for more information')
         sys.exit(1)
 
 
@@ -178,8 +179,6 @@ def wrap_up_message(log, player):
         player.show_card
         if past_scores[-1] == all_time_high:
             is_champion = player.name
-            # subprocess.call(['tput', 'reset'])
-            # print(Fore.CYAN + f.renderText(f'{champion} is the NEW CHAMPION!'))
             print(space + f'Congratulations {champion}!! You have the all time high score of {all_time_high}!')
         elif past_scores[-1] == high_score and len(past_scores) > 1:
             print(space + f'Congratulations! You have a new high score of {high_score}!!')
@@ -270,8 +269,6 @@ def game(player, dice):
     for i in range(len(player.card.game_board)):
         subprocess.call(['tput', 'reset'])
         print(Fore.CYAN + f.renderText(f'Round {Player.round}\n'))
-        if player.round == 1:
-            player.greet
         round(dice, player)
         Player.round += 1
     Player.round = 1

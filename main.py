@@ -5,8 +5,9 @@ from Classes import Dice
 
 from pyfiglet import Figlet
 
-from funcs import check_py_version, game, init_log_file, create_user_instance, player_from_log
-from funcs import log_final_score, wrap_up_message, print_big_yahtzee, play_again_prompt
+from funcs import (check_py_version, game, init_log_file, 
+                   create_user_instance, player_from_log, log_final_score, 
+                   wrap_up_message, print_big_yahtzee, play_again_prompt)
 
 
 def main():
