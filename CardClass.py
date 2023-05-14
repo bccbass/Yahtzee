@@ -30,14 +30,12 @@ class Card:
             enum_list.append(f'[{i+1}] {el}')
         return enum_list
     
-    # Checks a hand against all categories to return any possible match. This needs to accound for excluding already filled categories. 
+    # Checks a hand against all categories to return any possible match.
     def check_hand(self, hand):
         res =[test(hand) for test in self.test_hand if test(hand)]
         res.append('Chance')
         return res
-    
 
-    # THIS WOULD BE AN IDEAL PLACE FOR EXCEPTION HANDLING WRT ONLY ONE VALUE PER CATEGORY - CHECK IF CAT IS FILLED THEN OPERATE
     def update_round_points(self, category, hand):
         match category:
             case 'Three of a Kind' | 'Four of a Kind' | 'Chance':
