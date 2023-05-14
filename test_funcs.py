@@ -22,6 +22,9 @@ def test_input_filter():
     assert not input_filter('q') == False
     assert input_filter('wrong input') == False
 
+def test_remove_prompt():
+    monkeypatch.setattr('builtins.input', lambda _: '12345')
+    assert remove_prompt('12345') == ''
 
 
  
