@@ -1,4 +1,4 @@
-from PlayerClass import Player
+from Classes import Player
 import subprocess
 import sys
 import json
