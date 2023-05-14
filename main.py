@@ -3,6 +3,7 @@ import subprocess
 from DiceClass import Dice
 from funcs import check_py_version, game, init_log_file, create_user_instance, player_from_log, log_final_score, wrap_up_message, print_big_yahtzee, play_again_prompt
 from pyfiglet import Figlet
+import time
 
 
 
@@ -23,6 +24,9 @@ def main():
 
     player_from_log(log, player) # checks if player has previous history
     
+    player.greet
+    time.sleep(1.5) 
+
     game(player, dice)# Call game function to start
 
     log = log_final_score(player, log) #updates log with game results

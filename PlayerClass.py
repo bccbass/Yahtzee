@@ -1,5 +1,6 @@
 from CardClass import Card
 
+
 class Player: 
     round = 1
     def __init__(self, name='player'):
@@ -12,9 +13,9 @@ class Player:
     @property
     def greet(self):
         if not self.is_new:
-            print(f'Welcome back, {self.name}!')
+            print(f'\nWelcome back, {self.name}!')
         else:
-            print(f'Welcome to Yahtzee, {self.name}!')
+            print(f'\nWelcome to Yahtzee, {self.name}!')
 
     @property
     def show_card(self):

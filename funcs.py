@@ -40,8 +40,8 @@ def new_player_log(name): # Create a log dict to store user scores in JSON file
 
 # Input verification functions:
 def input_filter(input_res):
-    parsed_input = input_res.strip().lower()
-    if parsed_input == 'reset':
+    parsed_input = input_res.strip()
+    if parsed_input == 'RESET':
         return 'r'
     if parsed_input in ['q', 'quit'] or 'quit' in parsed_input:
         return 'q'
