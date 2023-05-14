@@ -8,8 +8,8 @@ echo '[
     ]
   },
   {
-    "john clease": {
-      "name": "John Clease",
+    "john cleese": {
+      "name": "John Cleese",
       "high_score": 75,
       "past_scores": [
         75

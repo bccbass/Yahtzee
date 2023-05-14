@@ -26,6 +26,21 @@
       "past_scores": [
         95
       ]
+    },
+    "lil champion": {
+      "name": "Lil Champion",
+      "high_score": 64,
+      "past_scores": [
+        64,
+        62
+      ]
+    },
+    "ben": {
+      "name": "Ben",
+      "high_score": 66,
+      "past_scores": [
+        66
+      ]
     }
   }
 ]
